@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "948643843856",
+    "project_id": "toko-minuman",
+    "storage_bucket": "toko-minuman.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:948643843856:android:edfe6fa3f5cfc4991b1f95",
+        "android_client_info": {
+          "package_name": "com.example.toko_minuman"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVFqpX0Ezf_a08OakHmb61xk6jlN78XX8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
