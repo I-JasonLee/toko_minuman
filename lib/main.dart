@@ -1,6 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'core/routes/app_router.dart';
+import 'core/theme/app_theme.dart';
+import 'features/auth/presentation/providers/auth_provider.dart';
+import 'features/dashboard/presentation/providers/product_provider.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -15,6 +19,7 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => ProductProvider()),
       ],
       child: const MyApp(),
     ),
@@ -29,11 +34,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Toko Minuman',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Center(
-          child: Text('Firebase Connected!'),
-        ),
-      ),
+      theme: AppTheme.light,
+      initialRoute: AppRouter.splash,
+      routes: AppRouter.routes,
     );
   }
 }
