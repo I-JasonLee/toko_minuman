@@ -4,6 +4,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import '../../../../core/constants/api_constants.dart';
 import '../../../../core/services/dio_client.dart';
 import '../../../../core/services/secure_storage.dart';
+import '../../data/repositories/auth_repository_impl.dart';
 
 // Representasi kondisi autentikasi
 enum AuthStatus {
@@ -100,29 +101,51 @@ class AuthProvider extends ChangeNotifier {
   }
 
   // ─── Verify Token ke Backend ──────────────────────────────
+  // Update (1)
+  // Future<bool> _verifyTokenToBackend() async {
+  //   try {
+  //     // Ambil Firebase ID Token
+  //     final firebaseToken = await _firebaseUser?.getIdToken();
+
+  //     // POST ke backend
+  //     final response = await DioClient.instance.post(
+  //       ApiConstants.verifyToken,
+  //       data: {'firebase_token': firebaseToken},
+  //     );
+
+  //     // Backend return JWT
+  //     final data = response.data['data'] as Map<String, dynamic>;
+  //     final backendToken = data['access_token'] as String;
+
+  //     // Simpan aman di device
+  //     await SecureStorageService.saveToken(backendToken);
+
+  //     _status = AuthStatus.authenticated;
+  //     notifyListeners();
+  //     return true;
+  //   } catch (e) {
+  //     _setError('Gagal verifikasi token: $e');
+  //     return false;
+  //   }
+  // }
+
+  // Update (2)
+  // Pastikan Anda sudah mengimport file repository-nya di atas:
+// import '../../data/repositories/auth_repository_impl.dart';
+
   Future<bool> _verifyTokenToBackend() async {
     try {
-      // Ambil Firebase ID Token
-      final firebaseToken = await _firebaseUser?.getIdToken();
-
-      // POST ke backend
-      final response = await DioClient.instance.post(
-        ApiConstants.verifyToken,
-        data: {'firebase_token': firebaseToken},
-      );
-
-      // Backend return JWT
-      final data = response.data['data'] as Map<String, dynamic>;
-      final backendToken = data['access_token'] as String;
-
-      // Simpan aman di device
+      final firebaseToken = await _firebaseUser?.getIdToken() ?? '';
+      
+      // Mengambil token dari data palsu di repository
+      final backendToken = await AuthRepositoryImpl().verifyFirebaseToken(firebaseToken);
+      
       await SecureStorageService.saveToken(backendToken);
-
       _status = AuthStatus.authenticated;
       notifyListeners();
       return true;
     } catch (e) {
-      _setError('Gagal verifikasi token: $e');
+      _setError('Gagal verifikasi: $e');
       return false;
     }
   }
