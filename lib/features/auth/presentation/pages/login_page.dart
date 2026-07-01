@@ -1,5 +1,9 @@
 import 'package:email_validator/email_validator.dart';
+<<<<<<< HEAD
 import 'package:firebase_auth/firebase_auth.dart';
+=======
+import 'package:firebase_auth/firebase_auth.dart' hide AuthProvider; 
+>>>>>>> 52b362492a0d4bb37457296bc8afd097bc83b256
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/routes/app_router.dart';

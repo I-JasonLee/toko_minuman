@@ -1,4 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> 52b362492a0d4bb37457296bc8afd097bc83b256
     <application
         android:label="toko_minuman"
         android:name="${applicationName}"
